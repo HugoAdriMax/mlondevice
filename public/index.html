@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML ON DEVICE - Solutions Digitales Innovantes</title>
+    <meta name="description" content="ML ON DEVICE - Société spécialisée dans les solutions digitales innovantes. Fondée par Max Levy.">
+    <link rel="canonical" href="https://mlondevice.fr/">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mlondevice.fr/">
+    <meta property="og:title" content="ML ON DEVICE - Solutions Digitales Innovantes">
+    <meta property="og:description" content="Société spécialisée dans les solutions digitales innovantes. Fondée par Max Levy.">
+    <meta property="og:image" content="https://mlondevice.fr/og-image.jpg">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ML ON DEVICE - Solutions Digitales Innovantes">
+    <meta name="twitter:description" content="Société spécialisée dans les solutions digitales innovantes.">
+    <meta name="twitter:image" content="https://mlondevice.fr/og-image.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ML ON DEVICE",
+      "url": "https://mlondevice.fr",
+      "logo": "https://mlondevice.fr/logo.svg",
+      "founder": {
+        "@type": "Person",
+        "name": "Max Levy",
+        "jobTitle": "Fondateur & CEO"
+      },
+      "description": "Société spécialisée dans les solutions digitales innovantes.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "FR"
+      }
+    }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0f1419;
+            --secondary: #192026;
+            --accent: #00d4ff;
+            --accent-dark: #0099ff;
+            --text: #ffffff;
+            --text-muted: #e5e7eb;
+            --gradient: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            inset: 0;
+            background: var(--primary);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .preloader-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 600;
+            overflow: hidden;
+        }
+        
+        .preloader-text span {
+            display: inline-block;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+        }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 6rem 4% 4rem;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .hero-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.8rem;
+        }
+        
+        .hero h1 .line {
+            display: block;
+            overflow: hidden;
+            padding-bottom: 0.1em;
+        }
+        
+        .hero h1 .line-inner {
+            display: block;
+        }
+        
+        .hero h1 .highlight {
+            color: var(--accent);
+        }
+        
+        .hero-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 4rem;
+        }
+        
+        .hero-description {
+            max-width: 400px;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+        
+        .hero-scroll {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+        }
+        
+        .hero-scroll-line {
+            width: 60px;
+            height: 1px;
+            background: var(--text-muted);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-scroll-line::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 30%;
+            background: var(--accent);
+            animation: scrollLine 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes scrollLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(400%); }
+        }
+        
+        /* Sections */
+        section {
+            padding: 5rem 4%;
+        }
+        
+        .section-header {
+            margin-bottom: 3rem;
+        }
+        
+        .section-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .section-title .word {
+            display: inline-block;
+            overflow: hidden;
+            margin-right: 0.3em;
+        }
+        
+        .section-title .word-inner {
+            display: inline-block;
+        }
+        
+        /* About */
+        .about {
+            background: var(--secondary);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+        
+        .about-text strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+        
+        .about-stats {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3rem;
+        }
+        
+        .stat {
+            border-left: 1px solid rgba(255,255,255,0.1);
+            padding-left: 2rem;
+        }
+        
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--accent);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Brands */
+        .brands {
+            background: var(--primary);
+        }
+        
+        .brand-card {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .brand-visual {
+            position: relative;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(0,212,255,0.1) 0%, rgba(0,153,255,0.05) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .brand-visual::before {
+            content: 'FIXIT';
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 8rem;
+            font-weight: 700;
+            color: rgba(0,212,255,0.1);
+            position: absolute;
+        }
+        
+        .brand-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .brand-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .brand-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .brand-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .brand-tag {
+            padding: 0.6rem 1.2rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .app-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: #fff;
+            color: #000;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .app-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0,212,255,0.2);
+        }
+        
+        .app-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .app-btn-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+        
+        .app-btn-text span {
+            font-size: 0.65rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .app-btn-text strong {
+            font-size: 1.1rem;
+        }
+        
+        /* Founder */
+        .founder {
+            background: var(--secondary);
+        }
+        
+        .founder-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .founder-image {
+            position: relative;
+        }
+        
+        .founder-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        .founder-content h3 {
+            font-size: 3.5rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .founder-role {
+            font-size: 1rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+        
+        .founder-quote {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            font-style: italic;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid var(--accent);
+        }
+        
+        .founder-values {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .value {
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 10px;
+        }
+        
+        .value h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .value p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 4rem 4%;
+            background: var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+        }
+        
+        .footer-logo img {
+            height: 40px;
+        }
+        
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        /* Marquee */
+        .marquee-section {
+            padding: 3rem 0;
+            background: var(--accent);
+            overflow: hidden;
+            display: flex;
+        }
+        
+        .marquee {
+            display: flex;
+            gap: 6rem;
+            animation: marquee 15s linear infinite;
+            flex-shrink: 0;
+            padding-right: 6rem;
+        }
+        
+        .marquee-item {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-grid,
+            .brand-card,
+            .founder-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            
+            .founder-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .founder-image {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 5%;
+            }
+            
+            .hero {
+                min-height: auto;
+                padding: 7rem 5% 3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-bottom {
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+            
+            .founder-values {
+                grid-template-columns: 1fr;
+            }
+            
+            .brand-visual {
+                aspect-ratio: 4/3;
+            }
+            
+            .brand-visual::before {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-text"><span>ML ON DEVICE</span></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="logo"><img src="logo.svg" alt="ML ON DEVICE"></div>
+        <ul class="nav-links">
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#brands">Marques</a></li>
+            <li><a href="#founder">Fondateur</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Solutions Digitales Innovantes</div>
+            <h1>
+                <span class="line"><span class="line-inner">L'innovation</span></span>
+                <span class="line"><span class="line-inner"><span class="highlight">au service</span></span></span>
+                <span class="line"><span class="line-inner">du quotidien.</span></span>
+            </h1>
+            <div class="hero-bottom">
+                <p class="hero-description">
+                    Nous construisons l'écosystème digital de demain. Des solutions concrètes pour des enjeux réels.
+                </p>
+                <div class="hero-scroll">
+                    <div class="hero-scroll-line"></div>
+                    <span>Scroll</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Marquee -->
+    <div class="marquee-section">
+        <div class="marquee">
+            <span class="marquee-item">Innovation</span>
+            <span class="marquee-item">Digital</span>
+            <span class="marquee-item">Solutions</span>
+            <span class="marquee-item">Impact</span>
+            <span class="marquee-item">Innovation</span>
+            <span class="marquee-item">Digital</span>
+            <span class="marquee-item">Solutions</span>
+            <span class="marquee-item">Impact</span>
+        </div>
+        <div class="marquee" aria-hidden="true">
+            <span class="marquee-item">Innovation</span>
+            <span class="marquee-item">Digital</span>
+            <span class="marquee-item">Solutions</span>
+            <span class="marquee-item">Impact</span>
+            <span class="marquee-item">Innovation</span>
+            <span class="marquee-item">Digital</span>
+            <span class="marquee-item">Solutions</span>
+            <span class="marquee-item">Impact</span>
+        </div>
+    </div>
+    
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="section-header">
+            <div class="section-number">01</div>
+            <h2 class="section-title">
+                <span class="word"><span class="word-inner">À</span></span>
+                <span class="word"><span class="word-inner">propos</span></span>
+            </h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <strong>ML ON DEVICE</strong> est une société spécialisée dans le développement de solutions digitales innovantes.
+                <br><br>
+                Notre mission : créer un <strong>écosystème de marques</strong> qui transforment le quotidien des Français en répondant à de véritables enjeux sociétaux.
+            </div>
+            <div class="about-stats">
+                <div class="stat">
+                    <div class="stat-number">01</div>
+                    <div class="stat-label">Marque active</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Brands -->
+    <section class="brands" id="brands">
+        <div class="section-header">
+            <div class="section-number">02</div>
+            <h2 class="section-title">
+                <span class="word"><span class="word-inner">Nos</span></span>
+                <span class="word"><span class="word-inner">marques</span></span>
+            </h2>
+        </div>
+        <div class="brand-card" style="grid-template-columns: 1fr;">
+            <div class="brand-content">
+                <h3>FIXIT</h3>
+                <p>
+                    L'application qui révolutionne la mise en relation entre prestataires de services et particuliers. Sur le modèle de l'ubérisation, FIXIT permet de trouver rapidement un professionnel qualifié pour tous vos besoins du quotidien.
+                </p>
+                <div class="brand-tags">
+                    <span class="brand-tag">Services à domicile</span>
+                    <span class="brand-tag">Mise en relation</span>
+                    <span class="brand-tag">Pros vérifiés</span>
+                </div>
+                <a href="https://apps.apple.com/fr/app/fixit/id6757300129" target="_blank" class="app-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    <div class="app-btn-text">
+                        <span>Disponible sur</span>
+                        <strong>App Store</strong>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Founder -->
+    <section class="founder" id="founder">
+        <div class="section-header">
+            <div class="section-number">03</div>
+            <h2 class="section-title">
+                <span class="word"><span class="word-inner">Le</span></span>
+                <span class="word"><span class="word-inner">fondateur</span></span>
+            </h2>
+        </div>
+        <div class="founder-grid">
+            <div class="founder-image">
+                <img src="max-levy.jpg" alt="Max Levy - Fondateur">
+            </div>
+            <div class="founder-content">
+                <h3>Max Levy</h3>
+                <div class="founder-role">Fondateur & CEO</div>
+                <p class="founder-quote">
+                    "Mon objectif est d'apporter, à travers mon écosystème digital, une multitude de solutions innovantes pour répondre aux véritables enjeux sociétaux de notre époque."
+                </p>
+                <div class="founder-values">
+                    <div class="value">
+                        <h4>Mission</h4>
+                        <p>Créer des outils digitaux qui simplifient la vie</p>
+                    </div>
+                    <div class="value">
+                        <h4>Vision</h4>
+                        <p>Un écosystème de solutions pour chaque besoin</p>
+                    </div>
+                    <div class="value">
+                        <h4>Valeurs</h4>
+                        <p>Innovation, accessibilité, impact positif</p>
+                    </div>
+                    <div class="value">
+                        <h4>Ambition</h4>
+                        <p>Devenir un acteur majeur du digital français</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p class="footer-text">© 2026 ML ON DEVICE. Tous droits réservés.</p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <script>
+        // Lenis smooth scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            smoothWheel: true
+        });
+        
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+        
+        // GSAP
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Sync Lenis with ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+        
+        // Preloader
+        const preloaderTl = gsap.timeline();
+        
+        preloaderTl
+            .to('.preloader-text span', {
+                y: 0,
+                opacity: 1,
+                duration: 0.4,
+                ease: 'power3.out'
+            })
+            .to('.preloader', {
+                yPercent: -100,
+                duration: 0.6,
+                ease: 'power4.inOut',
+                delay: 0.2
+            })
+            .from('.hero .line-inner', {
+                yPercent: 100,
+                duration: 1.2,
+                stagger: 0.1,
+                ease: 'power4.out'
+            }, '-=0.5')
+            .from('.hero-label, .hero-description, .hero-scroll', {
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.1,
+                ease: 'power3.out'
+            }, '-=0.8');
+        
+        // Section title reveals
+        gsap.utils.toArray('.section-title .word-inner').forEach(word => {
+            gsap.from(word, {
+                yPercent: 100,
+                duration: 1,
+                ease: 'power4.out',
+                scrollTrigger: {
+                    trigger: word,
+                    start: 'top 85%'
+                }
+            });
+        });
+        
+        // Fade in elements
+        gsap.utils.toArray('.about-text, .about-stats .stat, .brand-content, .brand-visual, .founder-image, .founder-content').forEach(el => {
+            gsap.from(el, {
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 80%'
+                }
+            });
+        });
+        
+        // Stats counter
+        gsap.utils.toArray('.stat-number').forEach(stat => {
+            const text = stat.textContent;
+            const num = parseInt(text);
+            if (!isNaN(num) && num > 100) {
+                gsap.from(stat, {
+                    textContent: 0,
+                    duration: 2,
+                    ease: 'power2.out',
+                    snap: { textContent: 1 },
+                    scrollTrigger: {
+                        trigger: stat,
+                        start: 'top 80%'
+                    }
+                });
+            }
+        });
+        
+        // Parallax on founder image
+        gsap.to('.founder-image img', {
+            yPercent: 15,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.founder',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+            }
+        });
+        
+        // Brand visual parallax
+        gsap.to('.brand-visual .brand-logo', {
+            y: -30,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.brand-visual',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+            }
+        });
+        
+        // Values stagger
+        gsap.from('.value', {
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.founder-values',
+                start: 'top 80%'
+            }
+        });
+        
+        // Nav hide on scroll down
+        let lastScroll = 0;
+        lenis.on('scroll', ({ scroll }) => {
+            if (scroll > lastScroll && scroll > 100) {
+                gsap.to('nav', { y: -100, duration: 0.3 });
+            } else {
+                gsap.to('nav', { y: 0, duration: 0.3 });
+            }
+            lastScroll = scroll;
+        });
+    </script>
+</body>
+</html>

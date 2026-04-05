@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(curl:*)",
+      "Bash(firebase deploy:*)",
+      "Bash(firebase experiments:enable:*)",
+      "Bash(git add:*)",
+      "Bash(git reset:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: Complete ML ON DEVICE website\n\n- Hero section with stats (50+ projets, 25+ apps)\n- Services page with pricing\n- Contact form with Firestore integration\n- Admin dashboard for messages\n- Full SEO configuration (metadata, JSON-LD, sitemap)\n- Firebase Hosting deployment setup\n- Responsive design with mobile optimizations\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")"
+    ]
+  }
+}

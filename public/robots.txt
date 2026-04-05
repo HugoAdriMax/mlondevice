@@ -1,0 +1,13 @@
+# Robots.txt for mlondevice.fr
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://mlondevice.fr/sitemap.xml
+
+# Crawl-delay (optional)
+Crawl-delay: 1

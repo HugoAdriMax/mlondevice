@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60">
+  <!-- ML Letters with circuit elements -->
+  <g fill="#00d4ff">
+    <!-- M -->
+    <path d="M5 50V10h8l12 28 12-28h8v40h-7V22l-11 28h-4L12 22v28H5z"/>
+    
+    <!-- L -->
+    <path d="M55 50V10h8v33h20v7H55z"/>
+    
+    <!-- Circuit dots -->
+    <circle cx="90" cy="30" r="3"/>
+    <circle cx="100" cy="20" r="2"/>
+    <circle cx="100" cy="40" r="2"/>
+    
+    <!-- Circuit lines -->
+    <rect x="93" y="29" width="12" height="2" rx="1"/>
+    <rect x="98" y="22" width="2" height="6" rx="1"/>
+    <rect x="98" y="32" width="2" height="6" rx="1"/>
+  </g>
+  
+  <!-- ON DEVICE text -->
+  <text x="110" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#ffffff">ON</text>
+  <text x="110" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="400" fill="#a1a1aa">DEVICE</text>
+</svg>
