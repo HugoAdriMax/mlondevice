@@ -44,7 +44,7 @@ export default function About() {
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-zinc-950 leading-[1.1]">
-                Une approche centrée sur vos <br className="hidden md:block" />
+                Une approche centrée sur vos{" "}
                 <span className="text-zinc-400 font-serif italic font-light tracking-normal">
                   besoins.
                 </span>

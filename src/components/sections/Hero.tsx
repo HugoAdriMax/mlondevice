@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, Play } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -67,13 +67,6 @@ export default function Hero() {
                   <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </button>
               </Link>
-
-              <button className="group flex items-center justify-center gap-4 px-8 py-5 border border-zinc-200 hover:border-zinc-950 transition-colors duration-300 bg-white">
-                <Play className="w-4 h-4 fill-zinc-950" />
-                <span className="text-sm font-semibold uppercase tracking-widest">
-                  Voir le showreel
-                </span>
-              </button>
             </div>
           </div>
         </div>
